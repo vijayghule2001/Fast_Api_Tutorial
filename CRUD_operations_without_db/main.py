@@ -34,3 +34,23 @@ def get_user_by_id(id:int):
     return {
         "msg":"user not found  "
     }
+
+@app.put('/user/{id}')
+def update_user(id:int, user_data:AddUser):
+    for index , user in enumerate(userList):
+        if user.id ==  id:
+            userList[index] = user_data
+            return{
+                "message":"user Update sucessfully",
+                "user": user_data
+            }    
+
+@app.delete('/user/{id}')
+def delete_user(id:int):
+    for user in userList:
+        if user.id == id:
+            userList.pop(user)
+            return user
+    return{
+        "error":"user not found "
+    }                
